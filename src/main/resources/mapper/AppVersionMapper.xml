@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncusoft.app_platform.mapper.AppVersionMapper">
+    <select id="getLatestAppVersionId" resultType="Long">
+        SELECT id FROM app_version WHERE app_id = #{appId}
+        ORDER BY creation_date DESC LIMIT 1
+    </select>
+</mapper>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncusoft.app_platform.mapper.AppMapper">
+    <select id="listHistoryAppVersionVo" resultType="com.ncusoft.app_platform.model.Vo.HistoryAppVersionVo">
+        SELECT v.id as version_id, i.software_name, v.version_no, v.version_size,
+               v.publish_status, v.apk_file_name, v.download_link, v.modify_date
+        FROM app_version v INNER JOIN app_info i ON v.app_id = i.id WHERE i.id = #{appId}
+    </select>
+</mapper>

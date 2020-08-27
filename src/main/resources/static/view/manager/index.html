@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>APP后台管理系统</title>
+	<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+	<style type="text/css">
+		html,body{
+			height:100%;
+			padding: 0px;
+			margin: 0px;
+		}
+		/*aside*/
+		aside{
+			width: 20%;
+			display: inline-block;
+			background-color: #4682B4;
+			height:100%;
+			text-align: center;color: white;
+		}
+		aside img{
+			margin-top: 10px;
+			height: 80px;
+			width: 80px;
+		}
+		aside #mes{
+			width: 80px;
+			display: inline-block;
+		}
+		aside #mes span{
+			display: block;
+		}
+		aside #drop-list{
+			display: inline-block;
+			text-align: left;
+		}
+		aside a{
+			display: inline-block;
+			color: white;
+			margin-bottom: 10px;
+		}
+
+		/*	right-div */
+		#right-div{
+			float: right;
+			width: 80%;
+			display: inline-block;
+			background-color: #F2F4F4 ;
+		}
+		/*下拉表单*/
+		#right-div #drop-nav{
+			padding-top: 10px;
+			padding-bottom: 20px;
+			height: 50px;
+			background-color:#F9F9F9;
+			border: 1px #DDDDDD;
+			float: right;
+		}
+		#right-div #drop-nav img{
+			float: right;
+			height: 35px;
+			margin-right: 5px;
+
+		}
+		#right-div #drop-nav a{
+			float: right;
+			margin-right: 20px;
+			width: 70px;
+		}
+
+		/*pannerl查询表单*/
+		#right-div #pannel-list{
+			margin:10px;
+		}
+		#right-div .list-item{
+			display: inline-block;
+			width: 250px;
+			height: 40px;
+			margin: 10px;
+		}
+		#right-div .list-item span{
+			display: inline-block;
+			margin-left: 20px;
+			margin-right: 10px;
+			font-weight: bold;
+		}
+		#right-div .list-item input,#right-div .list-item select{
+			display: inline-block;
+			width: 150px;
+		}
+		#right-div #pannel-list button{
+			margin-left: 20px;
+		}
+
+		/*table*/
+		#right-div #table-list{
+			margin:10px;
+			padding: 10px;
+			background-color: white;
+			padding-bottom: 40px;
+		}
+
+
+		#right-div #table-list > button{
+			float: right;
+		}
+		#right-div #table-list table{
+			text-align: center;
+		}
+		#right-div #table-list table button{
+			height: 30px;
+		}
+
+		/*	footer */
+		#right-div #footer{
+			background-color: white;
+			height: 40px;
+		}
+		#right-div #footer p{
+			margin-top: 10px;
+			float: right;
+			margin-right: 20px;
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<aside>
+	<h2>APP BMS</h2>
+
+	<!-- 个人信息显示 -->
+	<div>
+		<img src="../../img/head.png" />
+		<div id="mes">
+			<span>Welcome.</span>
+			<span>User_robot1</span>
+		</div>
+		<p>开发者</p>
+	</div>
+	<hr class="simple" color="#6f5499" />
+
+	<!-- 下拉列表 -->
+	<div id="drop-list">
+		<h3>APP管理</h3>
+		<a href="index.html?pageNum=1">APP审核</a><br/>
+	</div>
+	<!-- 底栏菜单项 -->
+
+</aside>
+
+
+<!-- right col-md-10 -->
+<div id="right-div">
+
+	<!-- 下拉导航 -->
+	<div id="drop-nav">
+		<input id="logout" type="button" class="btn btn-danger" value="退出" />
+		<img src="../../img/head.png" />
+	</div>
+
+	<!-- 查询表格 -->
+	<form class="panel panel-default" id="searchInfo">
+		<div class="panel-body">
+			<h4>APP 信息管理维护</h4>
+			<p>测试账号-您可以通过搜索或其他的筛选项对APP的信息进行维护操作——^_^</p>
+			<hr class="simple" color="#6f5499" />
+			<div class="list-item">
+				<span>软件名称</span>
+				<input class="form-control" type="text" name="appName" v-model="softName"/>
+			</div>
+			<div class="list-item">
+				<span>App状态</span>
+				<select id="appStatus" class="form-control" name="appStatus">
+					<option v-for="status in statusList" v-model="selectStatus">
+						{{status}}
+					</option>
+				</select>
+			</div>
+			<div class="list-item">
+				<span>所属平台</span>
+				<select id="platformName" class="form-control" name="platformName">
+					<option v-for="platform in platFormList" v-model="platformSelect">
+						{{platform}}
+					</option>
+				</select>
+			</div>
+			<div class="list-item">
+				<span>一级分类</span>
+				<select id="categoryLevel1" class="form-control" v-model="levelOne" name="categoryLevel1">
+					<option>---请选择---</option>
+					<option v-for="level1 in categoryOneList">
+						{{level1}}
+					</option>
+				</select>
+			</div>
+			<div class="list-item">
+				<span>二级分类</span>
+				<select id="categoryLevel2" class="form-control" v-model="levelTwo" name="categoryLevel2">
+					<option>---请选择---</option>
+					<option v-for="level2 in categoryTwoList">
+						{{level2}}
+					</option>
+				</select>
+			</div>
+			<div class="list-item">
+				<span>三级分类</span>
+				<select id="categoryLevel3" class="form-control" v-model="levelThree" name="categoryLevel3">
+					<option>---请选择---</option>
+					<option v-for="level3 in categoryThreeList">
+						{{level3}}
+					</option>
+				</select>
+			</div>
+			<input class="btn btn-primary" id="searchApp" value="查 询" @click="searchByInfo()"></input>
+		</div>
+	</form>
+
+
+	<!-- 表格 -->
+	<div id="table-list">
+		<table class="table table-striped table-bordered">
+			<thead>
+			<tr>
+				<th>软件名称</th>
+				<th>APK名称</th>
+				<th>软件大小(单位：MB)</th>
+				<th>所属平台</th>
+				<th>所属分类（一级分类、二级分类、三级分类）</th>
+				<th>状态</th>
+				<th>下载次数</th>
+				<th>最新版本号</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+
+			<tbody>
+			<tr v-for="appInfo in appInfoList">
+				<td>{{appInfo.softwareName}}</td>
+				<td>{{appInfo.apkName}}</td>
+				<td>{{appInfo.softwareSize}}</td>
+				<td>{{appInfo.platformName}}</td>
+				<td>{{appInfo.categoryLevel1}}->{{appInfo.categoryLevel2}}->{{appInfo.categoryLevel3}}</td>
+				<td>{{appInfo.status}}</td>
+				<td>{{appInfo.downloads}}</td>
+				<td>{{appInfo.versionNo}}</td>
+				<td>
+					<!-- 下拉按钮 -->
+					<div class="btn-group">
+						<a :href="'check_msg.html?id='+appInfo.id">审核</a>
+					</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<span>共{{totalNum}}条记录 {{pageNum}}/{{parseInt(totalNum/5)+1}}页</span>
+
+		<a class="btn btn-default" :href="'index.html?pageNum='+PrePage">上一页</a>
+		<a class="btn btn-default" style="margin-left: 5px;margin-right: 10px;" :href="'index.html?pageNum='+NextPage">下一页</a>
+	</div>
+
+	<div id="footer"><p>@2020 All Rights Reserved</p></div>
+</div>
+
+<script type="text/javascript" src="../../js/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../js/managerIndex.js"></script>
+<script type="text/javascript">
+	$(function () {
+		let token = localStorage.getItem("token")
+		console.log(token)
+		console.log(token === null)
+		// 如果没有 token，返回到登录界面
+		if (token === null) {
+			location.href = './login.html'
+		}
+		$("#logout").bind("click",function () {
+			$.ajax({
+				url:"/user/login",
+				type:"DELETE",
+				dataType : 'json',
+				headers:{
+					Authorization:localStorage.getItem("token")
+				},
+				success:function (data) {
+					console.log(data)
+					localStorage.removeItem('token')
+					window.location.href = '../index.html'
+				},
+				error:function () {
+
+				}
+			})
+			return false;
+		});
+	})
+</script>
+
+</body>
+</html>

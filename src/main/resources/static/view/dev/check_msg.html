@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>APP开发者平台-查看APP基础信息</title>
+	<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../../css/check_msg.css">
+</head>
+<body>
+<!-- left col-md-2 -->
+	<aside>
+		<h2>APP BMS</h2>
+		
+		<!-- 个人信息显示 -->
+		<div>
+			<img src="../../img/head.png" />
+			<div id="mes">
+				<span>Welcome.</span>
+				<span>User_robot1</span>
+			</div>
+			<p>开发者</p>
+		</div>
+		<hr class="simple" color="#6f5499" />		
+		
+		<!-- 下拉列表 -->
+		<div id="drop-list">
+			<h3>APP账户管理</h3>
+			<a href="msg_manager.html?pageNum=1">APP列表</a><br/>
+			<h3>APP应用管理</h3>
+			<a href="add_msg.html">新增APP基础信息</a><br/>
+		</div>
+
+		<!-- 底栏菜单项 -->
+
+	</aside>
+
+
+	<!-- right col-md-10 -->
+	<div id="right-div">
+		<!-- 下拉导航 -->
+		 <div id="drop-nav">
+		 	<a class="btn btn-danger" href="login.html">退出</a>
+		 	<img src="../../img/head.png" />
+		 </div>
+
+		<div id="pannel-list">
+			<p>查看APP基础信息</p>
+			<hr color="#6f5499" />	
+			<!-- 表单 -->
+			<form id="app_info_form" class="form-horizontal">
+				<!-- 13个条目 -->
+			  <div class="form-group">
+			    <label for="softwareName" class="col-sm-2 control-label">软件名称</label>
+			    <div class="col-sm-8">
+			      <input type="email" class="form-control" id="softwareName" name="softwareName" readonly >
+			    </div>
+			  </div>
+
+			   <div class="form-group">
+			    <label for="apkFileName" class="col-sm-2 control-label">APK名称</label>
+			    <div class="col-sm-8">
+			      <input type="email" class="form-control" id="apkFileName" name="apkFileName" readonly >
+			    </div>
+			  </div>
+
+			   <div class="form-group">
+			    <label for="supportROM" class="col-sm-2 control-label">支持ROM</label>
+			    <div class="col-sm-8">
+			      <input type="email" class="form-control" id="supportROM" name="supportROM" readonly >
+			    </div>
+			  </div>
+
+			   <div class="form-group">
+			    <label for="interfaceLanguage" class="col-sm-2 control-label">界面语言</label>
+			    <div class="col-sm-8">
+			      <input type="email" class="form-control" id="interfaceLanguage" name="interfaceLanguage" readonly >
+			    </div>
+			  </div>
+
+			   <div class="form-group">
+			    <label for="softwareSize" class="col-sm-2 control-label">软件大小</label>
+			    <div class="col-sm-8">
+			      <input type="email" class="form-control" id="softwareSize" name="softwareSize" readonly >
+			    </div>
+			  </div>
+
+			   <div class="form-group">
+			    <label for="downloads" class="col-sm-2 control-label">下载次数</label>
+			    <div class="col-sm-8">
+			      <input type="email" class="form-control" id="downloads" name="downloads" readonly >
+			    </div>
+			  </div>
+
+			   <div class="form-group">
+			    <label for="platformName" class="col-sm-2 control-label">所属平台</label>
+			    <div class="col-sm-8">
+					<input type="email" class="form-control" id="platformName" name="platformName" readonly >
+			    </div>
+			  </div>
+
+			   <div class="form-group">
+			    <label for="category" class="col-sm-2 control-label">所属分类</label>
+			    <div class="col-sm-8">
+					<input type="email" class="form-control" id="category" name="category" readonly >
+			    </div>
+			  </div>
+
+			   <div class="form-group">
+			    <label for="status" class="col-sm-2 control-label">APP状态</label>
+			    <div class="col-sm-8">
+					<input type="email" class="form-control" id="status" name="status" readonly >
+			    </div>
+			  </div>
+
+			   <div class="form-group">
+			    <label for="appInfo" class="col-sm-2 control-label">应用简介</label>
+			    <div class="col-sm-8">
+			      <textarea class="form-control" id="appInfo" name="appInfo"
+							rows="3" style="min-width: 90%" readonly ></textarea>
+			    </div>
+			  </div>
+
+				<div class="form-group">
+				    <label for="appLogo" class="col-sm-2 control-label">LOGO图片</label>
+				    <div class="col-sm-8">
+				      <img style="width: 50px;height: 50px" id="appLogo">
+				    </div>
+				</div>
+			</form>
+
+			<br>
+				<p>历史版本信息</p>
+				<hr   style="margin-top: 5px;margin-bottom: 15px;" />
+	            <table id="history_version_list" class="table table-striped table-bordered">
+	              <thead>
+	                <tr>
+	                  <th>软件名称</th>
+	                  <th>版本号</th>
+	                  <th>版本大小(单位：MB)</th>
+	                  <th>发布状态</th>
+	                  <th>APK文件下载</th>
+					  <th>最新更新时间</th>
+	                </tr>
+	              </thead>
+
+					<tbody>
+					<tr class="history_version_row" v-for="(version, index) in versionList"
+						:key="index">
+						<td>{{version.softwareName}}</td>
+						<td>{{version.versionNo}}</td>
+						<td>{{version.versionSize}}</td>
+						<td>{{version.publishStatusName}}</td>
+						<td>{{version.apkFileName}}</td>
+						<td>{{version.modifyDate}}</td>
+					</tr>
+					</tbody>
+
+	            </table>
+	            <a href="./modify_msg.html" class="btn btn-primary" >返回</a>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="../../js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script type="text/javascript" src="../../js/check_msg.js"></script>
+</body>
+</html>

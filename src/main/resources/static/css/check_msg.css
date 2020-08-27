@@ -1,0 +1,96 @@
+html,body{
+    height:100%;
+    padding: 0px;
+    margin: 0px;
+}
+/*aside*/
+aside{
+    width: 20%;
+    display: inline-block;
+    background-color: #4682B4;
+    height:100%;
+    text-align: center;color: white;
+}
+aside img{
+    margin-top: 10px;
+    height: 80px;
+    width: 80px;
+}
+aside #mes{
+    width: 80px;
+    display: inline-block;
+}
+aside #mes span{
+    display: block;
+}
+aside #drop-list{
+    display: inline-block;
+    text-align: left;
+}
+aside a{
+    display: inline-block;
+    color: white;
+    margin-bottom: 10px;
+}
+
+/*	right-div */
+#right-div{
+    float: right;
+    width: 80%;
+    /*height: 100%;*/
+    display: inline-block;
+    background-color: #F2F4F4 ;
+}
+/*下拉表单*/
+#right-div #drop-nav{
+    padding-top: 10px;
+    padding-bottom: 20px;
+    height: 50px;
+    background-color:#F9F9F9;
+    border: 1px #DDDDDD;
+}
+#right-div #drop-nav img{
+    float: right;
+    height: 35px;
+    margin-right: 5px;
+
+}
+#right-div #drop-nav a{
+    float: right;
+    margin-right: 20px;
+    width: 70px;
+}
+
+/*pannel*/
+#right-div #pannel-list{
+    margin:10px;
+    padding: 10px;
+    background-color: white;
+    padding-bottom: 40px;
+    height: 100%;
+}
+
+/*p*/
+#right-div #pannel-list > p{
+    font-weight: bold;
+    margin-left: 20px;
+}
+#right-div #pannel-list > hr{
+    margin-top:5px;
+}
+/*form-list*/
+#right-div .form-group{
+    margin-bottom: 5px;
+}
+
+
+/*	footer */
+#right-div #footer{
+    background-color: white;
+    height: 40px;
+}
+#right-div #footer p{
+    margin-top: 10px;
+    float: right;
+    margin-right: 20px;
+}

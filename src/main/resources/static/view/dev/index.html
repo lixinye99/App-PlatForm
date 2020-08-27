@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>APP开发者平台</title>
+	<link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+	<style type="text/css">
+		html,body{
+			height:100%;
+			padding: 0px;
+			margin: 0px;
+		}
+		/*aside*/
+		aside{
+			width: 20%;
+			display: inline-block;
+			background-color: #4682B4;
+			height:100%;
+			text-align: center;color: white;
+		}
+		aside img{
+			margin-top: 10px;
+			height: 80px;
+			width: 80px;
+		}
+		aside #mes{
+			width: 80px;
+			display: inline-block;
+		}
+		aside #mes span{
+			display: block;
+		}
+		aside #drop-list{
+			display: inline-block;
+			text-align: left;
+		}
+		aside a{
+			display: inline-block;
+			color: white;
+			margin-bottom: 10px;
+		}
+
+		/*	right-div */
+		#right-div{
+			float: right;
+			width: 80%;
+			display: inline-block;
+			background-color: #F2F4F4 ;
+		}
+		/*下拉表单*/
+		#right-div #drop-nav{
+			padding-top: 10px;
+			padding-bottom: 20px;
+			height: 50px;
+			background-color:#F9F9F9;
+			border: 1px #DDDDDD;
+			float: right;
+		}
+		#right-div #drop-nav img{
+			float: right;
+			height: 35px;
+			margin-right: 5px; 
+
+		}
+		#right-div #drop-nav a{
+			float: right;
+			margin-right: 20px;
+			width: 70px;
+		}
+		
+		/*pannel*/
+		#right-div #pannel-list{
+			margin:10px;
+			padding: 10px;
+			background-color: white;
+			padding-bottom: 40px;
+			height: 610px;
+		}
+
+		/*	footer */
+		#right-div #footer{
+			background-color: white;
+			height: 40px;
+		}
+		#right-div #footer p{
+			margin-top: 10px;
+			float: right;
+			margin-right: 20px;
+		}
+	</style>
+</head>
+<body>
+<!-- left col-md-2 -->
+	<aside>
+		<h2>APP BMS</h2>
+		
+		<!-- 个人信息显示 -->
+		<div>
+			<img src="../../img/head.png" />
+			<div id="mes">
+				<span>Welcome.</span>
+				<span>User_robot1</span>
+			</div>
+			<p>开发者</p>
+		</div>
+		<hr class="simple" color="#6f5499" />		
+		
+		<!-- 下拉列表 -->
+		<div id="drop-list">
+			<h3>APP账户管理</h3>
+			<a href="msg_manager.html?pageNum=1">APP列表</a><br/>
+			<h3>APP应用管理</h3>
+			<a href="add_msg.html">新增APP基础信息</a><br/>
+		</div>
+
+		<!-- 底栏菜单项 -->
+
+	</aside>
+
+
+	<!-- right col-md-10 -->
+	<div id="right-div">
+		
+		<!-- 下拉导航 -->
+		 <div id="drop-nav">
+			 <input id="logout" type="button" class="btn btn-danger" value="退出" />
+		 	<img src="../../img/head.png" />
+		 </div>
+
+		<div id="pannel-list">
+			<h2>欢迎你，测试账户001 | 角色：开发者账户</h2>
+		</div>
+
+		<div id="footer"><p>@2020 All Rights Reserved</p></div>
+	</div>
+
+	<script type="text/javascript" src="../../js/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="../../js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(function () {
+			let token = localStorage.getItem("token")
+			console.log(token)
+			// 如果没有 token，返回到登录界面
+			if (!token) {
+				window.location.href = './login.html'
+			}
+			$("#logout").bind("click",function () {
+				$.ajax({
+					url:"/user/login",
+					type:"DELETE",
+					dataType : 'json',
+					headers:{
+						Authorization:localStorage.getItem("token")
+					},
+					success:function (data) {
+						console.log(data)
+						localStorage.removeItem('token')
+						window.location.href = '../index.html'
+					},
+					error:function () {
+
+					}
+				})
+				return false;
+			});
+		})
+	</script>
+</body>
+</html>
